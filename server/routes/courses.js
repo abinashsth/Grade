@@ -14,6 +14,34 @@ router.use(protect);
 
 const { upload } = require('../middleware/upload');
 
+// @desc    Get enrolled courses for current student
+// @route   GET /api/courses/enrolled
+// @access  Private/Student
+router.get('/enrolled', protect, authorize('student'), async (req, res) => {
+  try {
+    const courses = await Course.find({
+      enrolledStudents: req.user.id,
+      isActive: true
+    })
+      .populate('teacherId', 'name email')
+      .sort({ semester: -1, year: -1, name: 1 });
+
+    res.status(200).json({
+      success: true,
+      count: courses.length,
+      data: courses
+    });
+
+  } catch (error) {
+    console.error('Get enrolled courses error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
 // @desc    Get all courses with role-based filtering
 // @route   GET /api/courses
 // @access  Private

@@ -16,6 +16,7 @@ import Grades from './pages/Grades';
 import Admin from './pages/Admin';
 import StudentCourses from './pages/student/Courses';
 import StudentReports from './pages/student/Reports';
+import StudentGradeReport from './pages/student/GradeReport';
 import TeacherCourses from './pages/teacher/Courses';
 import TeacherReports from './pages/teacher/Reports';
 import TeacherCourseView from './pages/teacher/CourseView';
@@ -78,6 +79,14 @@ function App() {
                 element={
                   <ProtectedRoute roles={['student']}>
                     <StudentReports />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/student/grade-report"
+                element={
+                  <ProtectedRoute roles={['student']}>
+                    <StudentGradeReport />
                   </ProtectedRoute>
                 }
               />

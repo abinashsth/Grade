@@ -69,6 +69,9 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/courses', require('./routes/courses'));
 app.use('/api/grades', require('./routes/grades'));
+app.use('/api/assignments', require('./routes/assignments'));
+app.use('/api/submissions', require('./routes/submissions'));
+app.use('/api/evaluations', require('./routes/evaluations'));
 app.use('/api/landing', require('./routes/landing'));
 app.use('/api/analytics', require('./routes/analytics'));
 
